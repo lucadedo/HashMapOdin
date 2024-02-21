@@ -33,7 +33,7 @@ const HashMap = function() {
     };
 
     this.length = function() {
-        console.log('HashMap length: ' +this.filled);
+        console.log('HashMap length: ' + this.filled);
         return this.filled;
     };
 
@@ -41,6 +41,11 @@ const HashMap = function() {
         this.capacity = this.buckets.length * 2;
     };
 
+    this.clear = function() {
+        this.filled = 0;
+        this.buckets = new Array(16);
+		this.capacity = this.buckets.length;
+    }
     
 
 };
