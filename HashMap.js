@@ -50,6 +50,14 @@ const HashMap = function() {
 
     };
 
+    this.has = function(key) {
+        let index = this.hash(key);
+        let res = this.buckets[index].contains(key)
+       console.log(res);
+       return this.buckets[index].contains(key);
+    }
+
+
     this.length = function() {
         console.log('HashMap length: ' + this.filled);
         return this.filled;
@@ -70,13 +78,19 @@ const HashMap = function() {
 
 const FamilyHashMap = new HashMap();
 // luca.hash('luca');
+
+
 FamilyHashMap.set('DAD','Mauro');
 FamilyHashMap.set('MOM','Monica');
 FamilyHashMap.set('firstSon','Paolo')
 FamilyHashMap.set('secondSon','Luca');
 FamilyHashMap.set('firstSon','Paolo2');
 
-FamilyHashMap.get('firstSon');
+//FamilyHashMap.get('firstSon');
+
+FamilyHashMap.has('MOM');
+FamilyHashMap.has('secondSon2');
+
 
 FamilyHashMap.length();
 
