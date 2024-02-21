@@ -35,7 +35,6 @@ const HashMap = function() {
         let index = this.hash(key);
         if (!this.buckets[index]) {
             this.buckets[index] = new LinkedList();
-            console.log(this.buckets);
         };
         this.filled++;
         this.buckets[index].insertAtHead(key, value);
@@ -89,7 +88,7 @@ const HashMap = function() {
         entries.forEach((entry) => {
             allKeys.push(entry[0]);
         });
-        console.log(entries);
+        console.log(allKeys);
         return allKeys;
 
     };
@@ -110,24 +109,27 @@ const HashMap = function() {
         for (let i = 0; i <= this.buckets.length; i++) {
             if (this.buckets[i]) {
                 this.buckets[i].print(entries);
-            }
-            console.log(entries);
-            return entries;
-        }
+                
+            };
+        };
+        console.log(entries);
+        return entries;
     };
 
 };
 
 const FamilyHashMap = new HashMap();
-// luca.hash('luca');
-
 
 FamilyHashMap.set('DAD','Mauro');
 FamilyHashMap.set('MOM','Monica');
 FamilyHashMap.set('firstSon','Paolo')
 FamilyHashMap.set('secondSon','Luca');
-FamilyHashMap.keys();
+console.log(FamilyHashMap.buckets);
 
+
+
+FamilyHashMap.keys();
+FamilyHashMap.values();
 
 
 // FamilyHashMap.has('DAD');
