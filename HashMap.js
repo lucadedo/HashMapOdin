@@ -1,4 +1,4 @@
-import { LinkedList } from "./LinkedList.js";
+import { LinkedList } from "./LinkedList.mjs";
 
 const HashMap = function() {
     this.buckets = new Array(16);
@@ -22,8 +22,9 @@ const HashMap = function() {
         if (this.filled / this.buckets.length >= this.loadFactor) { this.grow(); };
 
         let index = this.hash(key);
-        if (this.buckets[index]) {
+        if (!this.buckets[index]) {
             this.buckets[index] = new LinkedList();
+            console.log(this.buckets);
         };
         this.filled++;
         this.buckets[index].insertAtHead(key,value);
@@ -32,19 +33,24 @@ const HashMap = function() {
     };
 
     this.length = function() {
-        console.log(this.filled);
+        console.log('HashMap length: ' +this.filled);
         return this.filled;
     };
 
     this.grow = function() {
-
+        this.capacity = this.buckets.length * 2;
     };
+
+    
 
 };
 
-const luca = new HashMap();
-luca.hash('luca');
-luca.length();
+const FamilyHashMap = new HashMap();
+// luca.hash('luca');
+FamilyHashMap.set('DAD','Mauro');
+FamilyHashMap.set('MOM','Monica');
+
+FamilyHashMap.length();
 
 
 
