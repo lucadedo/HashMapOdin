@@ -76,4 +76,4 @@ LinkedList.formValues = function(...values) {
     }
     return list
 }
-module.exports = LinkedList;
+export { LinkedList };
