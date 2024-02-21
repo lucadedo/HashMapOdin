@@ -1,13 +1,10 @@
 
-
-
 class Node {
   constructor(key) {
     this.key = key;
     this.next = null;
   }
 }
-
 
 class NodeWithValue extends Node {
 	constructor(key, value = null) {
@@ -66,15 +63,18 @@ export class LinkedList {
 
 
 
-  print() {
-    let output = '';
+  print(all) {
     let current = this.head;
     while (current) {
-        output = ` ${output} ${current.value} -> `
+      if (current.value) {
+        all.push([current.key, current.value]);
+      }else{
+        all.push(current.key);
+      }  
         current = current.next;
     }
-    console.log(`${output}null`);
-  }
+   
+  };
 
   insertAtIndex(index, value) {
     if(index === 0) return this.insertAtHead(value);
@@ -91,13 +91,38 @@ export class LinkedList {
     this.length--;
   }
 
-  removeAtIndex(index) {
-    if(index === 0) return this.removeHead();
-    const prev = this.getElementIndex(index - 1);
-    if(prev == null) return null;
-
-    prev.next = prev.next.next
-    this.length--;
+  removeAtIndex(key) {
+      if (this.head.key === key) {
+        // the list is only 1 long:
+        if (this.length === 1) {
+          this.head = null;
+          this.length = 0;
+        } else {
+          this.head = this.head.next;
+          this.length--;
+        }
+        return true;
+      }else{
+        let current = this.head;
+        if (current.next) {
+          while (current !== null) {
+            // if current is the value before:
+            if (current.next.key === key) {
+              // if there is a value after:
+              if (current.next.next) {
+               current.next = current.next.next;
+                // if value to delete is the tail:
+              } else {
+                current.next = null;
+              }
+              this.length--;
+              return true;
+            }
+            current = current.next;
+          }
+        }
+        return false;
+      }
 
 
   };
