@@ -38,7 +38,7 @@ const HashMap = function() {
             console.log(this.buckets);
         };
         this.filled++;
-        this.buckets[index].insertAtHead(key,value);
+        this.buckets[index].insertAtHead(key, value);
     };
 
     this.get = function(key) {
@@ -52,11 +52,21 @@ const HashMap = function() {
 
     this.has = function(key) {
         let index = this.hash(key);
-        let res = this.buckets[index].contains(key)
-       console.log(res);
+        let res = this.buckets[index];
+       console.log(res.contains(key));
        return this.buckets[index].contains(key);
-    }
+    };
 
+    this.remove = function(key) {
+        let index = this.hash(key);
+		if (this.buckets[index].removeAtIndex(key)) {
+			this.filled--;
+			return true;
+		}
+		return false;
+        
+        
+    };
 
     this.length = function() {
         console.log('HashMap length: ' + this.filled);
@@ -72,7 +82,39 @@ const HashMap = function() {
         this.buckets = new Array(16);
 		this.capacity = this.buckets.length;
     };
-    
+
+    this.keys = function() {
+        let allKeys = [];
+        let entries = this.entries();
+        entries.forEach((entry) => {
+            allKeys.push(entry[0]);
+        });
+        console.log(entries);
+        return allKeys;
+
+    };
+
+    this.values = function() {
+        let values = [];
+        let entries = this.entries();
+        entries.forEach((entry) => {
+            values.push(entry[1]);
+        });
+        console.log(values);
+        return values;
+    };
+
+    this.entries = function() {
+        let entries = [];
+        
+        for (let i = 0; i <= this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                this.buckets[i].print(entries);
+            }
+            console.log(entries);
+            return entries;
+        }
+    };
 
 };
 
@@ -84,13 +126,14 @@ FamilyHashMap.set('DAD','Mauro');
 FamilyHashMap.set('MOM','Monica');
 FamilyHashMap.set('firstSon','Paolo')
 FamilyHashMap.set('secondSon','Luca');
-FamilyHashMap.set('firstSon','Paolo2');
+FamilyHashMap.keys();
 
-//FamilyHashMap.get('firstSon');
 
-FamilyHashMap.has('MOM');
-FamilyHashMap.has('secondSon2');
 
+// FamilyHashMap.has('DAD');
+// FamilyHashMap.remove('DAD');
+
+//FamilyHashMap.get('DAD');
 
 FamilyHashMap.length();
 
