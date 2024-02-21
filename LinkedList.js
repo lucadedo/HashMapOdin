@@ -1,13 +1,32 @@
+
+
+
+class Node {
+  constructor(value, next) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+
 class LinkedList {
   constructor() {
     this.head = null;
-    this.length = 0;
+    this.length = null;
+    this.tail = this.getTail();
   }
 
-  insertAtHead(data) {
-    const newNode = new Node(data, this.head);//create new node and pass the parameters, set head as next node
-    this.head = newNode; 
-    this.length++;
+  insertAtHead(key, value) {
+    let newNode = new Node(key, value);//create new node and pass the parameters, set head as next node
+    if (this.head === null) {
+      this.head = newNode;
+      this.length = 1;
+    }else{
+      this.getTail();
+      let last = this.getTail();
+      last.next = newNode;
+      this.length++;
+    }
   }
 
   getElementIndex(index) {
@@ -19,6 +38,21 @@ class LinkedList {
     }
     return current;
   }
+
+
+  getTail() {
+    let current = this.head;
+    if (this.head === null) {
+      return null;
+    }
+    while (current.next !== null) {
+          current = current.next;
+    }
+    return current
+  }
+
+
+
 
   print() {
     let output = '';
@@ -60,12 +94,7 @@ class LinkedList {
 
 }
 
-class Node {
-  constructor(value, next) {
-    this.value = value;
-    this.next = next;
-  }
-}
+
 
 
 
@@ -76,4 +105,7 @@ LinkedList.formValues = function(...values) {
     }
     return list
 }
+
+
+
 export { LinkedList };
