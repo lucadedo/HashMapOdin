@@ -2,10 +2,18 @@
 
 
 class Node {
-  constructor(value, next) {
-    this.value = value;
+  constructor(key) {
+    this.key = key;
     this.next = null;
   }
+}
+
+
+class NodeWithValue extends Node {
+	constructor(key, value = null) {
+		super(key);
+		this.value = value;
+	}
 }
 
 
@@ -17,7 +25,7 @@ export class LinkedList {
   }
 
   insertAtHead(key, value) {
-      let newNode = new Node(key, value);//create new node and pass the parameters, set head as next node
+      let newNode = value ? new NodeWithValue(key, value) : new Node(key,value); //create new node and pass the parameters, set head as next node
       if (this.head === null) {
         this.head = newNode;
         this.length = 1;
@@ -29,26 +37,30 @@ export class LinkedList {
       }
   }
 
-  getElementIndex(index) {
-    if(index < 0 || index >= this.length ) return null
+  getElementIndex(data) {
 
     let current = this.head;
-    for (let i = 0; i < index; i++) {
-        current = current.next;
+    while (current.next !== null) {
+      if (current.key === data) {
+          return current.value;
+      };
+      current = current.next;
     }
-    return current;
+    if (current.next === null) {
+      return current.value;
+    }
   }
 
 
   getTail() {
     let current = this.head;
     if (this.head === null) {
-      return null;
+        return null;
     }
     while (current.next !== null) {
           current = current.next;
     }
-    return current
+    return current;
   }
 
 
