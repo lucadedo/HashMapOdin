@@ -100,7 +100,24 @@ export class LinkedList {
     this.length--;
 
 
-  }
+  };
+  contains(data) {
+		let current = this.head;
+
+		if (current.key === data || this.getTail().key === data) {
+			return true;
+		}
+		while (current.next !== null) {
+			if (current.key === data) {
+        
+				return true;
+			}
+			current = current.next;
+       
+		}
+    
+		return false;
+	}
 
 
 
