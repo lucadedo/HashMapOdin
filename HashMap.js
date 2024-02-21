@@ -1,3 +1,5 @@
+import { LinkedList } from "./LinkedList.js";
+
 const HashMap = function() {
     this.buckets = new Array(16);
     this.filled = 0;
@@ -16,10 +18,17 @@ const HashMap = function() {
         return hashCode;
     };
    
-    this.set = function() {
-        if (this.filled / this.buckets.length >= this.loadFactor) {
-                 
-        }
+    this.set = function(key, value) {
+        if (this.filled / this.buckets.length >= this.loadFactor) { this.grow(); };
+
+        let index = this.hash(key);
+        if (this.buckets[index]) {
+            this.buckets[index] = new LinkedList();
+        };
+        this.filled++;
+        this.buckets[index].insertAtHead(key,value);
+
+
     };
 
     this.length = function() {
