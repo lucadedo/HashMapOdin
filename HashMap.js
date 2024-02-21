@@ -12,12 +12,21 @@ const HashMap = function() {
         const primeNumber = 31;
         for (let i = 0; i < key.length; i++) {
           hashCode = primeNumber * hashCode + key.charCodeAt(i);
-          hashCode %= 16; //  apply the  % modulo operator on each iteration ,to avoid collisions
+          
         }
+
+        let index = hashCode % this.buckets.length;//  apply the  % modulo operator on each iteration ,to avoid collisions
+
+        if (index < 0 || index >= this.buckets.length) { // check if index is out of bound
+            throw new Error("Trying to access index out of bound");
+        };
+
         console.log(hashCode);
-        return hashCode;
+        return index;
     };
    
+
+    
     this.set = function(key, value) {
         if (this.filled / this.buckets.length >= this.loadFactor) { this.grow(); };
 
@@ -45,7 +54,7 @@ const HashMap = function() {
         this.filled = 0;
         this.buckets = new Array(16);
 		this.capacity = this.buckets.length;
-    }
+    };
     
 
 };
