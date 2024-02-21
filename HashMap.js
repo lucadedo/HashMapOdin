@@ -120,17 +120,14 @@ const HashMap = function() {
 
 const FamilyHashMap = new HashMap();
 
-FamilyHashMap.set('DAD','Mauro');
-FamilyHashMap.set('MOM','Monica');
-FamilyHashMap.set('firstSon','Paolo')
-FamilyHashMap.set('secondSon','Luca');
+FamilyHashMap.set('DAD','Jack');
+FamilyHashMap.set('MOM','Amanda');
+FamilyHashMap.set('firstSon','Andy')
+FamilyHashMap.set('secondSon','Luke');
 console.log(FamilyHashMap.buckets);
-
-
 
 FamilyHashMap.keys();
 FamilyHashMap.values();
-
 
 // FamilyHashMap.has('DAD');
 // FamilyHashMap.remove('DAD');
